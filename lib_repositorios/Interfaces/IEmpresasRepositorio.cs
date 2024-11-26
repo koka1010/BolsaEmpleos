@@ -5,6 +5,8 @@ namespace lib_repositorios.Interfaces
 {
     public interface IEmpresasRepositorio
     {
+        void Configurar(string string_conexion);
+
         List<Empresas> Listar();
         List<Empresas> Buscar(Expression<Func<Empresas, bool>> condiciones);
         Empresas Guardar(Empresas entidad);

@@ -43,5 +43,10 @@ namespace lib_repositorios.Implementaciones
             conexion!.GuardarCambios();
             return entidad;
         }
+
+        public void Configurar(string string_conexion)
+        {
+            this.conexion!.StringConnection = string_conexion;
+        }
     }
 }

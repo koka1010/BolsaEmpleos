@@ -17,11 +17,9 @@ namespace asp_presentacion
         public void ConfigureServices(WebApplicationBuilder builder, IServiceCollection services)
         {
             // Comunicaciones
-            services.AddScoped<IProductosComunicacion, ProductosComunicacion>();
-            services.AddScoped<ITiposComunicacion, TiposComunicacion>();
+            services.AddScoped<IDetallesComunicacion, DetallesComunicacion>();
             // Presentaciones
-            services.AddScoped<IProductosPresentacion, ProductosPresentacion>();
-            services.AddScoped<ITiposPresentacion, TiposPresentacion>();
+            services.AddScoped<IDetallesPresentacion, DetallesPresentacion>();
 
             services.AddControllers();
             services.AddEndpointsApiExplorer();

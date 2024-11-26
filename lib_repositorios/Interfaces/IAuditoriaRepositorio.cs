@@ -5,6 +5,8 @@ namespace lib_repositorios.Interfaces
 {
     public interface IAuditoriaRepositorio
     {
+        void Configurar(string string_conexion);
+
         List<Auditoria> Listar();
         List<Auditoria> Buscar(Expression<Func<Auditoria, bool>> condiciones);
         Auditoria Guardar(Auditoria entidad);
