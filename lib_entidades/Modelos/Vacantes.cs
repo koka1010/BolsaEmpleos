@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace lib_entidades.Modelos
 {
    
@@ -24,6 +25,13 @@ namespace lib_entidades.Modelos
         public void ValidarCantidad()
         {
 
+        }
+        public bool Validar()
+        {
+            if (string.IsNullOrEmpty(Nombre_vacante) ||
+                Empresa <= 0)
+                return false;
+            return true;
         }
 
     }

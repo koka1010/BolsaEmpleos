@@ -1,5 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.IdentityModel.Tokens;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace lib_entidades.Modelos
 {
@@ -18,6 +20,13 @@ namespace lib_entidades.Modelos
         public void ValidacionEstudios()
         {
 
+        }
+        public bool Validar()
+        {
+            if (Postulacion < 0 ||
+                Persona < 0)
+                return false;
+            return true;
         }
 
     }

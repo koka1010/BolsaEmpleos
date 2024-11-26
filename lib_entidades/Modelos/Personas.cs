@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace lib_entidades.Modelos
 {
     
@@ -24,5 +25,15 @@ namespace lib_entidades.Modelos
       
         [NotMapped] public ICollection<Detalles> Detalles { get; set; }
         [NotMapped] public ICollection<Estudios> Estudios { get; set; }
+        public bool Validar()
+        {
+            if (string.IsNullOrEmpty(Cedula) ||
+                string.IsNullOrEmpty(Nombre_persona) ||
+                string.IsNullOrEmpty(Direccion) ||
+                string.IsNullOrEmpty(Cargos) ||
+                string.IsNullOrEmpty(Estado) )
+                return false;
+            return true;
+        }
     }
 }
