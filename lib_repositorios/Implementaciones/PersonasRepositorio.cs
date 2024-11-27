@@ -7,15 +7,26 @@ namespace lib_repositorios.Implementaciones
     public class PersonasRepositorio : IPersonasRepositorio
     {
         private Conexion? conexion = null;
+        private IAuditoriaRepositorio? iAuditoriaRepositorio;
 
-        public PersonasRepositorio(Conexion conexion)
+        public PersonasRepositorio(Conexion conexion,
+             IAuditoriaRepositorio iAuditoriaRepositorio)
         {
+
             this.conexion = conexion;
+            this.iAuditoriaRepositorio = iAuditoriaRepositorio;
         }
 
         public List<Personas> Listar()
         {
-            return conexion!.Listar<Personas>();
+            iAuditoriaRepositorio!.Guardar(new Auditoria
+            {
+                Tabla = "Personas",
+                Referencia = 0,
+                Accion = "Listar"
+
+            });
+            return Buscar(x => x != null);
         }
 
         public List<Personas> Buscar(Expression<Func<Personas, bool>> condiciones)
@@ -27,6 +38,13 @@ namespace lib_repositorios.Implementaciones
         {
             conexion!.Guardar(entidad);
             conexion!.GuardarCambios();
+            iAuditoriaRepositorio!.Guardar(new Auditoria
+            {
+                Tabla = "Personas",
+                Referencia = entidad.Id,
+                Accion = "Guardar"
+
+            });
             return entidad;
         }
 
@@ -34,6 +52,13 @@ namespace lib_repositorios.Implementaciones
         {
             conexion!.Modificar(entidad);
             conexion!.GuardarCambios();
+            iAuditoriaRepositorio!.Guardar(new Auditoria
+            {
+                Tabla = "Personas",
+                Referencia = entidad.Id,
+                Accion = "Modificar"
+
+            });
             return entidad;
         }
 
@@ -41,8 +66,16 @@ namespace lib_repositorios.Implementaciones
         {
             conexion!.Borrar(entidad);
             conexion!.GuardarCambios();
+            iAuditoriaRepositorio!.Guardar(new Auditoria
+            {
+                Tabla = "Personas",
+                Referencia = entidad.Id,
+                Accion = "Borrar"
+
+            });
             return entidad;
         }
+
         public void Configurar(string string_conexion)
         {
             this.conexion!.StringConnection = string_conexion;

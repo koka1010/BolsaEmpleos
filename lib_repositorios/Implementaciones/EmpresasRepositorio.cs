@@ -7,15 +7,26 @@ namespace lib_repositorios.Implementaciones
     public class EmpresasRepositorio : IEmpresasRepositorio
     {
         private Conexion? conexion = null;
+        private IAuditoriaRepositorio? iAuditoriaRepositorio;
 
-        public EmpresasRepositorio(Conexion conexion)
+        public EmpresasRepositorio(Conexion conexion,
+             IAuditoriaRepositorio iAuditoriaRepositorio)
         {
+
             this.conexion = conexion;
+            this.iAuditoriaRepositorio = iAuditoriaRepositorio;
         }
 
         public List<Empresas> Listar()
         {
-            return conexion!.Listar<Empresas>();
+            iAuditoriaRepositorio!.Guardar(new Auditoria
+            {
+                Tabla = "Empresas",
+                Referencia = 0,
+                Accion = "Listar"
+
+            });
+            return Buscar(x => x != null);
         }
 
         public List<Empresas> Buscar(Expression<Func<Empresas, bool>> condiciones)
@@ -27,6 +38,13 @@ namespace lib_repositorios.Implementaciones
         {
             conexion!.Guardar(entidad);
             conexion!.GuardarCambios();
+            iAuditoriaRepositorio!.Guardar(new Auditoria
+            {
+                Tabla = "Empresas",
+                Referencia = entidad.Id,
+                Accion = "Guardar"
+
+            });
             return entidad;
         }
 
@@ -34,6 +52,13 @@ namespace lib_repositorios.Implementaciones
         {
             conexion!.Modificar(entidad);
             conexion!.GuardarCambios();
+            iAuditoriaRepositorio!.Guardar(new Auditoria
+            {
+                Tabla = "Empresas",
+                Referencia = entidad.Id,
+                Accion = "Modificar"
+
+            });
             return entidad;
         }
 
@@ -41,6 +66,13 @@ namespace lib_repositorios.Implementaciones
         {
             conexion!.Borrar(entidad);
             conexion!.GuardarCambios();
+            iAuditoriaRepositorio!.Guardar(new Auditoria
+            {
+                Tabla = "Empresas",
+                Referencia = entidad.Id,
+                Accion = "Borrar"
+
+            });
             return entidad;
         }
 

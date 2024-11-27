@@ -32,7 +32,14 @@ namespace lib_repositorios
             .Take(tamaño)
             .ToList();
         }
-
+        public virtual List<Detalles> Buscar(Expression<Func<Detalles, bool>> condiciones)
+        {
+            return this.Set<Detalles>()
+                .Include(x => x._Persona)
+                .Include(x => x._Postulacion)
+                .Where(condiciones)
+                .ToList();
+        }
         public virtual List<T> Buscar<T>(Expression<Func<T, bool>> condiciones) where T : class, new()
         {
             return this.Set<T>()
