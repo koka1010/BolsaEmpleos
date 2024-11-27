@@ -21,16 +21,16 @@ namespace lib_repositorios
         protected DbSet<Estudios>? Estudios { get; set; }
         protected DbSet<Postulaciones>? Postulaciones { get; set; }
         protected DbSet<Detalles>? Detalles { get; set; }
+        protected DbSet<Login>? Login { get; set; }
+        protected DbSet<Auditoria>? Auditoria { get; set; }
 
-        public virtual DbSet<T> ObtenerSet<T>() where T : class, new()
-        {
-            return this.Set<T>();
-        }
         public virtual List<T> Listar<T>() where T : class, new()
         {
-            return this.Set<T>()
-            .Take(tamaño)
-            .ToList();
+            return this.Set<T>().ToList();
+        }
+        public virtual List<T> Buscar<T>(Expression<Func<T, bool>> condiciones) where T : class, new()
+        {
+            return this.Set<T>().Where(condiciones).ToList();
         }
         public virtual List<Detalles> Buscar(Expression<Func<Detalles, bool>> condiciones)
         {
@@ -40,13 +40,28 @@ namespace lib_repositorios
                 .Where(condiciones)
                 .ToList();
         }
-        public virtual List<T> Buscar<T>(Expression<Func<T, bool>> condiciones) where T : class, new()
+        public virtual List<Estudios> Buscar(Expression<Func<Estudios, bool>> condiciones)
         {
-            return this.Set<T>()
-            .Where(condiciones)
-            .Take(tamaño)
-            .ToList();
+            return this.Set<Estudios>()
+                .Include(x => x._Persona)
+                .Where(condiciones)
+                .ToList();
         }
+        public virtual List<Postulaciones> Buscar(Expression<Func<Postulaciones, bool>> condiciones)
+        {
+            return this.Set<Postulaciones>()
+                .Include(x => x._Vacante)
+                .Where(condiciones)
+                .ToList();
+        }
+        public virtual List<Vacantes> Buscar(Expression<Func<Vacantes, bool>> condiciones)
+        {
+            return this.Set<Vacantes>()
+                .Include(x => x._Empresa)
+                .Where(condiciones)
+                .ToList();
+        }
+
 
         public virtual bool Existe<T>(Expression<Func<T, bool>> condiciones) where T : class, new()
         {

@@ -63,6 +63,12 @@ CREATE TABLE [Auditoria] (
     [Referencia] INT,
     [Accion]  NVARCHAR(50),
 );
+CREATE TABLE [Login] (
+    [Id] INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+    [Nombre] NVARCHAR(50),
+    [Contraseña]  NVARCHAR(50),
+	[Rol] NVARCHAR(50)
+);
 
 
 --INSERT PARA HACER LAS PRUEBAS UNITARIAS
