@@ -23,7 +23,7 @@ namespace asp_servicios
             services.Configure<IISServerOptions>(x => { x.AllowSynchronousIO = true; });
             services.AddControllers();
             services.AddEndpointsApiExplorer();
-            //services.AddSwaggerGen();
+            services.AddSwaggerGen();
             services.AddScoped<Conexion, Conexion>();
             // Repositorios
             services.AddScoped<IDetallesRepositorio, DetallesRepositorio>();
@@ -39,8 +39,8 @@ namespace asp_servicios
         {
             if (env.IsDevelopment())
             {
-                //app.UseSwagger();
-                //app.UseSwaggerUI();
+                app.UseSwagger();
+                app.UseSwaggerUI();
             }
             app.UseHttpsRedirection();
             app.UseAuthorization();
