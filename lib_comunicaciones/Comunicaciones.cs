@@ -5,8 +5,8 @@ namespace lib_comunicaciones
     public class Comunicaciones
     {
         public string? Protocolo = "http://",
-            Host = "localhost:5281",
-            Servicio = "",// "asp_BolsaEmpleo_servicios/",
+            Host = "localhost:30429",
+            Servicio = "",// "asp_BolsaEmpleos_servicios/",
             Nombre = string.Empty,
             Final = string.Empty,
             token = null;

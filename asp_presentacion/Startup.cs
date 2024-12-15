@@ -18,8 +18,22 @@ namespace asp_presentacion
         {
             // Comunicaciones
             services.AddScoped<IDetallesComunicacion, DetallesComunicacion>();
+            services.AddScoped<IEmpresasComunicacion, EmpresasComunicacion>();
+            services.AddScoped<IEstudiosComunicacion, EstudiosComunicacion>();
+            services.AddScoped<ILoginComunicacion, LoginComunicacion>();
+            services.AddScoped<IPersonasComunicacion, PersonasComunicacion>();
+            services.AddScoped<IPostulacionesComunicacion, PostulacionesComunicacion>();
+            services.AddScoped<IVacantesComunicacion, VacantesComunicacion>();
+
+
             // Presentaciones
             services.AddScoped<IDetallesPresentacion, DetallesPresentacion>();
+            services.AddScoped<IEmpresasPresentacion, EmpresasPresentacion>();
+            services.AddScoped<IEstudiosPresentacion, EstudiosPresentacion>();
+            services.AddScoped<ILoginPresentacion, LoginPresentacion>();
+            services.AddScoped<IPersonasPresentacion, PersonasPresentacion>();
+            services.AddScoped<IPostulacionesPresentacion, PostulacionesPresentacion>();
+            services.AddScoped<IVacantesPresentacion, VacantesPresentacion>();
 
             services.AddControllers();
             services.AddEndpointsApiExplorer();
